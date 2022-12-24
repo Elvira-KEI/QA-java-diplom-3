@@ -1,10 +1,14 @@
 package org.example.page;
+
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
+
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.page;
+
 public class LoginPage {
     @FindBy(how = How.XPATH, using = ".//a[text()='Зарегистрироваться']")
     private SelenideElement registerLink;
@@ -56,5 +60,22 @@ public class LoginPage {
     public boolean clickLoginButton(Condition condition) {
         loginButton.click();
         return loginButton.shouldBe(condition).isDisplayed();
+    }
+    public boolean isLoginButtonDisplayed() {
+        loginButton.shouldBe(exist);
+        return loginButton.isDisplayed();
+    }
+    //метод клика по тексту "Зарегистрироваться"
+    @Step("Клик по клика \"Зарегистрироваться\"")
+    public void clickRegister() {
+        loginButton.shouldBe(exist);
+        registerLink.shouldBe(exist);
+        registerLink.click();
+    }
+    //метод клика по тексту "Восстановить пароль"
+    @Step("Клик по тексту \"Восстановить пароль\"")
+    public void clickRecoverPassword() {
+        forgotPasswordLink.shouldBe(exist);
+        forgotPasswordLink.click();
     }
 }
